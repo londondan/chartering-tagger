@@ -10,7 +10,7 @@ https://docs.google.com/spreadsheets/d/1yKPGZhV8XerSrifLVJBwLVej1mm0JWF4KnzUt-W5
 
 
 # Usage:
-'''python
+```python
 import portid
 #initialize the data
 ports = portid.get_ports()
@@ -21,4 +21,4 @@ email_body = '' #load the string of text in the eml here
 key_text = portid.clean_text(email_body, vessels)
 p = portid.find_ports_in_text(ports, key_text)
 print(p['Continents'])
-'''
+```
