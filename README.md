@@ -9,6 +9,30 @@ And a Google Sheets list of all the Bulk Vessel names in the world (13k):
 https://docs.google.com/spreadsheets/d/1yKPGZhV8XerSrifLVJBwLVej1mm0JWF4KnzUt-W5VQM/edit#gid=0
 
 
+# Setting this up
+This code relies on connecting to Google Sheets for key static data. In order to set this up, you need to create credentials for the Google API to programmatically read this data.
+
+You can find a more indepth discussion here, but generally the steps involved are:
+https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html
+
+1. Go to the Google APIs Console.
+2. Create a new project.
+3. Click Enable API. Search for and enable the Google Drive API.
+4. Create credentials for a Web Server to access Application Data.
+5. Name the service account and grant it a Project Role of Editor.
+6. Download the JSON file.
+7. Copy the JSON file to your code directory and rename it to client_secret.json
+8. Find the  client_email inside client_secret.json. Back in your spreadsheet, click the Share button in the top right, and paste the client email into the People field
+
+You will then have to modify this file (line 34 and 64) to reference your key
+```python
+    # and an API key generates from the console, you will have to create your own integration key
+    scope = ['https://spreadsheets.google.com/feeds']
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('YOUR_FILENAME_HERE', scope)
+    gc = gspread.authorize(credentials)
+```
+Your code will now use this email account to authorize API access, and you will be able to connect to the two public spreadsheets and pull the list of 17k ports into a dataframe inside of your own code.
+
 # Usage:
 ```python
 import portid
