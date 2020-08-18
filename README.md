@@ -46,3 +46,28 @@ key_text = portid.clean_text(email_body, vessels)
 p = portid.find_ports_in_text(ports, key_text)
 print(p['Continents'])
 ```
+
+# Example:
+```python
+text = '''Please offer for following firm enquiry from our close chrtrs:
+
+OFFERS TO BE RECEIVED LATEST BY TUESDAY, 1ST JANUARY 2020 12:00 HRS 
+
+AC XXXX
+8,000 MT 5% MOLCHOPT OF STEEL SECTIONS/BEAMS (PRE-PL ATTACHED)
+1SP/SB KHALIFA BIN SALMAN PORT, BAHRAIN / 1SP/SB INCHEON NORTH PORT, SOUTH KOREA
+LAYCAN 01-07 JANUARY 2020
+LOAD RATE : 1,200 MT - 24 CONSEC. HOURS 12 TT  FHINC 2 CRANES/2 GANGS WORKING SIMULTANEOUSLY OTHERWISE PRO-RATA BASIS NUMBER OF CRANES USED. MIN. 1 GANG GUARANTEED'''
+
+text = clean_text(text, vessels)
+p = portid.find_ports_in_text(ports, text)
+print(p)
+```
+
+Output:
+```
+      country_code port_code          port_name latin_port_name Continent
+24              AE       KHL  Khalifa/Abu Dhabi         khalifa        AS
+15360           KR       INC            Incheon         incheon        AS
+15901           MY       SNP           North Pt           north        AS
+```
